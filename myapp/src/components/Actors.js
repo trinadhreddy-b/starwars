@@ -28,8 +28,7 @@ function Actors() {
 
   return (
     <>
-    <Header />
-      <Paper sx={{ padding: "2rem", margin: "1rem" }}>
+        <Paper sx={{ padding: "2rem", margin: "1rem" }}>
         <Stack direction="row" justifyContent="center">
           <Typography paddingBottom={"2rem"} variant="h4">
             CHARACTERS

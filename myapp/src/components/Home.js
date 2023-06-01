@@ -24,8 +24,7 @@ function Home() {
   }, []);
   return (
     <>
-    <Header />
-    <Box sx={{ padding: "2rem" }}>
+      <Box sx={{ padding: "2rem" }}>
       <Grid container spacing={{ xs: 2, md: 3 }}>
         {movies.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.episode_id} >

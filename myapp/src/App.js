@@ -5,6 +5,7 @@ import Films from "./components/Films";
 import Actors from "./components/Actors";
 import ActorDetails from "./components/ActorDetails";
 import StarShip from "./components/StarShips";
+import Header from "./components/Header";
 
 
 export const config = {
@@ -22,14 +23,16 @@ export const roman = {
 
 function App() {
   return (
+    <>
+    <Header />
     <Routes>
-     
       <Route exact path="/films/:id" element={<Films />} />
       <Route exact path="/actors" element={<Actors />} />
       <Route exact path="/actors/:id" element={<ActorDetails />} />
       <Route exact path="/starships" element={<StarShip />} />
       <Route path="/" element={<Home />} />
     </Routes>
+    </>
   );
 }
 
