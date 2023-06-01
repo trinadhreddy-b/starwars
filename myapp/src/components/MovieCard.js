@@ -3,28 +3,25 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { roman } from "../App";
 import "./MovieCard.css";
 
-export default function MovieCard({ item }) {
-  const navigate = useNavigate();
-
-  const clickHandler = () => {
-    navigate("/MovieDetails", { state: item });
-  };
+export default function MovieCard({ item}) {
+  
+  const url=item.url.split("/");
+ 
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card className="card">
         <CardContent>
           <CardMedia
             component="img"
-            alt="green iguana"
-            image={require(`../assets/episode${item.episode_id}.jpg`)}
+            alt={item.title}
+            image={require(`../assets/episode${url[5]}.jpg`)}
           />
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Episode {roman[item.episode_id]}: {item.title}
@@ -38,9 +35,9 @@ export default function MovieCard({ item }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={clickHandler}>
-            Movie Details...
-          </Button>
+        <Link to={`/films/${url[5]}`}>
+                 Movie Details...
+                 </Link>
         </CardActions>
       </Card>
     </Box>

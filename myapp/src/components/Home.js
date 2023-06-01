@@ -5,8 +5,11 @@ import axios from "axios";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import MovieCard from "./MovieCard";
+import Header from "./Header";
+
 
 function Home() {
+  
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function fetchMovies() {
@@ -15,21 +18,23 @@ function Home() {
       const movieData = response.data.results.sort(
         (a, b) => a.episode_id - b.episode_id
       );
-      console.log(movieData);
       setMovies([...movieData]);
     }
     fetchMovies();
   }, []);
   return (
+    <>
+    <Header />
     <Box sx={{ padding: "2rem" }}>
       <Grid container spacing={{ xs: 2, md: 3 }}>
         {movies.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.episode_id}>
+          <Grid item xs={12} sm={6} md={4} key={item.episode_id} >
             <MovieCard item={item} />
           </Grid>
         ))}
       </Grid>
     </Box>
+    </>
   );
 }
 

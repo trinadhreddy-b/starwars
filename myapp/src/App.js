@@ -1,7 +1,11 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import MovieDetails from "./components/MovieDetails";
+import Films from "./components/Films";
+import Actors from "./components/Actors";
+import ActorDetails from "./components/ActorDetails";
+import StarShip from "./components/StarShips";
+
 
 export const config = {
   endpoint: "https://swapi.dev/api",
@@ -19,8 +23,12 @@ export const roman = {
 function App() {
   return (
     <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/MovieDetails" element={<MovieDetails />} />
+     
+      <Route exact path="/films/:id" element={<Films />} />
+      <Route exact path="/actors" element={<Actors />} />
+      <Route exact path="/actors/:id" element={<ActorDetails />} />
+      <Route exact path="/starships" element={<StarShip />} />
+      <Route path="/" element={<Home />} />
     </Routes>
   );
 }
