@@ -2,12 +2,12 @@ import { Paper, Stack, Typography, Grid} from "@mui/material";
 
 import {Pagination} from '@mui/material';
 import { useState, useEffect } from "react";
-import { config } from "../App";
+import { config } from "../../App";
 import axios from "axios";
-import Character from "./Character";
-import Header from "./Header";
+import Character from "../Character";
+
 function Actors() {
-  const [actors, setActors] = useState({});
+  const [actors, setActors] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {

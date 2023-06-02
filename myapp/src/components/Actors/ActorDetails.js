@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { config } from "../App";
+import { config } from "../../App";
 import axios from "axios";
 import { Paper, Grid, Typography, Stack, CardMedia } from "@mui/material";
-import pic from "../assets/pic.png";
-import Starship from "./Starship";
+import pic from "../../assets/pic.png";
+import Starship from "../Starships/StarshipAvatar";
+import FilmAvatar from "../Films/FilmAvatar";
 
 function ActorDetails() {
   const { id } = useParams();
@@ -68,6 +69,19 @@ function ActorDetails() {
             actor.starships.map((ship, index) => (
               <Grid item xs={4} md={2} key={index}>
                 <Starship url={ship} />
+              </Grid>
+            ))}
+        </Grid>
+      </Paper>
+      <Paper sx={{ padding: "2rem", margin: "1rem" }}>
+        <Typography paddingBottom={"1rem"} variant="h4">
+          Films
+        </Typography>
+        <Grid container spacing={2}>
+          {actor.films &&
+            actor.films.map((film, index) => (
+              <Grid item xs={4} md={2} key={index}>
+                <FilmAvatar url={film} />
               </Grid>
             ))}
         </Grid>

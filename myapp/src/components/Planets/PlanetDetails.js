@@ -1,26 +1,24 @@
-import { Paper, Stack, Typography, Grid, CardMedia } from "@mui/material";
-import { roman } from "../App";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { config } from "../App";
+import { config } from "../../App";
 import axios from "axios";
-import Planet from "./Planets/PlanetAvatar";
-import ActorCard from "./Actors/ActorAvatar";
-function Films() {
-  const { id } = useParams();
+import { Paper, Grid, Typography, Stack, CardMedia } from "@mui/material";
+import star from "../../assets/star.jpg";
+import ActorAvatar from "../Actors/ActorAvatar";
+import FilmAvatar from "../Films/FilmAvatar";
 
-  const [item, setItem] = useState({});
+function PlanetDetails() {
+  const { id } = useParams();
+  const [planet, setPlanet] = useState({});
 
   useEffect(() => {
-    async function fetchFilm() {
-      const url = config.endpoint + `/films/${id}`;
+    async function fetchCharacter() {
+      const url = config.endpoint + `/planets/${id}`;
       const response = await axios.get(url);
-      console.log(response);
       const data = await response.data;
-
-      setItem(data);
+      setPlanet(data);
     }
-    fetchFilm();
+    fetchCharacter();
   }, [id]);
 
   return (
@@ -28,7 +26,7 @@ function Films() {
       <Paper sx={{ padding: "2rem", margin: "1rem" }}>
         <Stack direction="row" justifyContent="center">
           <Typography paddingBottom={"2rem"} variant="h4">
-            Episode {roman[item.episode_id]}:{item.title}
+            Planet Name: {planet.name}
           </Typography>
         </Stack>
 
@@ -36,47 +34,49 @@ function Films() {
           <Grid item xs={12} sm={6}>
             <CardMedia
               component="img"
-              alt="green iguana"
+              alt={planet.name}
               height="250"
-              image={require(`../assets/episode${id}.jpg`)}
+              image={star}
               sx={{ objectFit: "contain" }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="body2">
-              Director: {item.director}
-              <br />
-              Producer: {item.producer}
-              <br />
-              Release Date: {item.release_date}
-              <br />
-              Opening Crawl: {item.opening_crawl}
+            
+            rotation_period: {planet.rotation_period} <br /> 
+            orbital_period: {planet.orbital_period} <br />
+            diameter: {planet.diameter} <br /> 
+            climate: {planet.climate} <br /> 
+            gravity: {planet.gravity} <br /> 
+            terrain: {planet.terrain} <br /> 
+            surface_water: {planet.surface_water} <br /> 
+            population: {planet.population} <br />
             </Typography>
           </Grid>
         </Grid>
       </Paper>
       <Paper sx={{ padding: "2rem", margin: "1rem" }}>
         <Typography paddingBottom={"1rem"} variant="h4">
-          CHARACTERS
+          Residents:
         </Typography>
         <Grid container spacing={2}>
-          {item.characters &&
-            item.characters.map((actor, index) => (
+          {planet.residents &&
+            planet.residents.map((people, index) => (
               <Grid item xs={4} md={2} key={index}>
-                <ActorCard url={actor} />
+                <ActorAvatar url={people} />
               </Grid>
             ))}
         </Grid>
       </Paper>
       <Paper sx={{ padding: "2rem", margin: "1rem" }}>
         <Typography paddingBottom={"1rem"} variant="h4">
-          PLANETS
+          Films
         </Typography>
         <Grid container spacing={2}>
-          {item.planets &&
-            item.planets.map((planet, index) => (
+          {planet.films &&
+            planet.films.map((film, index) => (
               <Grid item xs={4} md={2} key={index}>
-                <Planet url={planet} />
+                <FilmAvatar url={film} />
               </Grid>
             ))}
         </Grid>
@@ -85,4 +85,4 @@ function Films() {
   );
 }
 
-export default Films;
+export default PlanetDetails;

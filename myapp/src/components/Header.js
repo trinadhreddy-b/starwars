@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, TextField, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
@@ -40,9 +40,10 @@ const MobileMenuButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const Header = () => {
+const Header = ({handleSearchInputChange,searchQuery}) => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const handleMobileMenuOpen = () => {
     setMobileMenuOpen(true);
@@ -53,22 +54,34 @@ const Header = () => {
   };
 
   const handleButtonClick = (url) => {
+    
     navigate(url);
     handleMobileMenuClose();
+
   };
+  useEffect(() => {
+    setInputValue(searchQuery);
+  }, [searchQuery]);
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setInputValue(value);
+    handleSearchInputChange(value);
+  };
+ 
 
   return (
     <React.Fragment>
       <HeaderAppBar position="static">
         <Toolbar>
           <HeaderTitle variant="h6">
-            My App
+            STARWARS
           </HeaderTitle>
-          <HeaderSearch variant="outlined" placeholder="Search..." size="small" />
+          <HeaderSearch variant="outlined" placeholder="Search..." size="small" onChange={handleInputChange} value={inputValue} />
           <MobileMenuButton edge="start" color="inherit" aria-label="menu" onClick={handleMobileMenuOpen}>
             <MenuIcon />
           </MobileMenuButton>
-          <HeaderButton variant="contained" onClick={() => handleButtonClick('/home')}>
+          <HeaderButton variant="contained" onClick={() => handleButtonClick('/')}>
             Home
           </HeaderButton>
           <HeaderButton variant="contained" onClick={() => handleButtonClick('/actors')}>
@@ -84,17 +97,17 @@ const Header = () => {
       </HeaderAppBar>
       <Drawer anchor="left" open={isMobileMenuOpen} onClose={handleMobileMenuClose}>
         <List>
-          <ListItem button onClick={() => handleButtonClick('/home')}>
-            <ListItemText primary="Home" />
+          <ListItem  onClick={() => handleButtonClick('/')} >
+            <ListItemText primary="Home" style={{ cursor: 'pointer' }}/>
           </ListItem>
-          <ListItem button onClick={() => handleButtonClick('/actors')}>
-            <ListItemText primary="Actors" />
+          <ListItem  onClick={() => handleButtonClick('/actors')} >
+            <ListItemText primary="Actors" style={{ cursor: 'pointer' }}/>
           </ListItem>
-          <ListItem button onClick={() => handleButtonClick('/starships')}>
-            <ListItemText primary="Starships" />
+          <ListItem  onClick={() => handleButtonClick('/starships')} >
+            <ListItemText primary="Starships" style={{ cursor: 'pointer' }} />
           </ListItem>
-          <ListItem button onClick={() => handleButtonClick('/planets')}>
-            <ListItemText primary="Planets" />
+          <ListItem  onClick={() => handleButtonClick('/planets')} >
+            <ListItemText primary="Planets" style={{ cursor: 'pointer' }} />
           </ListItem>
         </List>
       </Drawer>

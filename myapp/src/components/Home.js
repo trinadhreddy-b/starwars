@@ -5,7 +5,7 @@ import axios from "axios";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import MovieCard from "./MovieCard";
-import Header from "./Header";
+
 
 
 function Home() {

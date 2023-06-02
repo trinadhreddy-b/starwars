@@ -2,24 +2,24 @@ import { Paper, Stack, Typography, Grid} from "@mui/material";
 
 import {Pagination} from '@mui/material';
 import { useState, useEffect } from "react";
-import { config } from "../App";
+import { config } from "../../App";
 import axios from "axios";
-import Character from "./Character";
-import Header from "./Header";
-function StarShip() {
-  const [ships, setShips] = useState({});
+import Character from "../Character";
+
+function Planets() {
+  const [planets, setPlanets] = useState({});
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function fetchActors() {
-      const url = config.endpoint + `/starships?page=${page}&format=json`;
+    async function fetchPlanets() {
+      const url = config.endpoint + `/planets?page=${page}&format=json`;
       const response = await axios.get(url);
       console.log(response);
       const data = await response.data.results;
       console.log(data);
-      setShips(data);
+      setPlanets(data);
     }
-    fetchActors();
+    fetchPlanets();
   }, [page]);
   
   const handleChange = (event,value) => {
@@ -28,26 +28,25 @@ function StarShip() {
 
   return (
     <>
-    <Header />
-      <Paper sx={{ padding: "2rem", margin: "1rem" }}>
+        <Paper sx={{ padding: "2rem", margin: "1rem" }}>
         <Stack direction="row" justifyContent="center">
           <Typography paddingBottom={"2rem"} variant="h4">
-            CHARACTERS
+            PLANETS
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end">
         <Pagination
       component="div"
-      count={4}
+      count={6}
       page={page}
       onChange={handleChange}
     />
     </Stack>
         <Grid container spacing={2} >
-          {ships.length>0 &&
-            ships.map((ship, index) => (
+          {planets.length>0 &&
+            planets.map((planet, index) => (
               <Grid item xs={4} md={4} key={index}>
-                <Character data={ship}/>
+                <Character data={planet}/>
               </Grid>
             ))}
         </Grid>
@@ -56,7 +55,7 @@ function StarShip() {
   );
 }
 
-export default StarShip;
+export default Planets;
 
 
 
