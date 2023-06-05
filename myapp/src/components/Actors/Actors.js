@@ -45,7 +45,7 @@ function Actors() {
         <Grid container spacing={2} >
           {actors.length>0 &&
             actors.map((actor, index) => (
-              <Grid item xs={6} sm={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Character data={actor}/>
               </Grid>
             ))}

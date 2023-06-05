@@ -45,7 +45,7 @@ function StarShip() {
         <Grid container spacing={2} >
           {ships.length > 0 &&
             ships.map((ship, index) => (
-              <Grid item xs={6} sm={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Character data={ship} />
               </Grid>
             ))}
