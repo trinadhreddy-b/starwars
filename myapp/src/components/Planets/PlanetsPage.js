@@ -45,7 +45,7 @@ function Planets() {
         <Grid container spacing={2} >
           {planets.length>0 &&
             planets.map((planet, index) => (
-              <Grid item xs={4} md={4} key={index}>
+              <Grid item xs={6} sm={4} key={index}>
                 <Character data={planet}/>
               </Grid>
             ))}

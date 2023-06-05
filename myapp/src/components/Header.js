@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, TextField, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
+
 
 const HeaderAppBar = styled(AppBar)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
@@ -40,7 +41,7 @@ const MobileMenuButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const Header = ({handleSearchInputChange,searchQuery}) => {
+const Header = ({handleSearchInputChange}) => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -54,14 +55,11 @@ const Header = ({handleSearchInputChange,searchQuery}) => {
   };
 
   const handleButtonClick = (url) => {
-    
     navigate(url);
     handleMobileMenuClose();
 
   };
-  useEffect(() => {
-    setInputValue(searchQuery);
-  }, [searchQuery]);
+ 
 
   const handleInputChange = (event) => {
     const { value } = event.target;

@@ -42,10 +42,10 @@ function StarShip() {
             onChange={handleChange}
           />
         </Stack>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} >
           {ships.length > 0 &&
             ships.map((ship, index) => (
-              <Grid item xs={4} md={4} key={index}>
+              <Grid item xs={6} sm={4} key={index}>
                 <Character data={ship} />
               </Grid>
             ))}
